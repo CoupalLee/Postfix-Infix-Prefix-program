@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string>
+#include "Stack.cpp"
 #include "Expression.h"
 
 using namespace std;
