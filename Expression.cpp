@@ -174,49 +174,30 @@ string Expression::preToInFix() {
 
 
 double Expression::evaluate() {
-    
-    Stack<char> stackOfOperands;
-    string pref = getPreFix();
-    //double answer = 0;
-    //char operandOne;
-    //char operandTwo;
-    
-    Stack<char> stk;
-    
-    for(int i = 0; i < pref.length(); i++)
-        stk.push(pref.at(i));
-    
-    int length = (int)pref.size();
-    
-    for (int i = length; i >= 0; i--) {
-        if(isOperator(pref[i])){
-            //double operand1 = convertToDoub(stackOfOperands.peek());
-            stackOfOperands.pop();
-            // double operand2 = convertToDoub(stackOfOperands.peek());
-            stackOfOperands.pop();
+        Stack<double> resultStack;
+        char inputCharacter;
+        double j;
+        double firstNumber, secondNumber, result;
+        for(j=0; j<postfix.length(); j++){
+            inputCharacter = this->postfix[j];
+            if(inputCharacter >= '0' && inputCharacter <= '9')
+               resultStack.push((inputCharacter-'0'));
+            else  {
+                secondNumber = resultStack.pop();
+                firstNumber = resultStack.pop();
+                switch(inputCharacter) {
+                    case '+': result = firstNumber + secondNumber; break;
+                    case '-': result = firstNumber - secondNumber; break;
+                    case '*': result = firstNumber * secondNumber; break;
+                    case '/': result = firstNumber / secondNumber; break;
+                    default:  result = 0;
+                }
+               resultStack.push(result);
+            }
         }
-        else{
-            stackOfOperands.push(stk.peek());
-            stk.pop();
-        }
+        result = resultStack.pop();
+        return result;
     }
-    
-    // Hello Marker;
-    // The idea here was to do something similar to converting to infix.
-    // We start by sorting the operators and operands
-    // when you reach an operator you convert and store the operands to numbers and store that back into a number stack
-    // repeat until the end of the array
-    // There is an issue with calling convertToDoub that we have never seen
-    //Linker command failed with exit code 1
-    // it refrences only the two lines where we use converToDoub
-    // otherwise this evaluate method would be complete.
-    // :feelsbadman:
-    
-    
-    
-    return 1.0;
-    
-}
 
 bool Expression::isOperator(char inputCharacter) { //return true if any of the operators below are the char given
     if(inputCharacter == '+'||
