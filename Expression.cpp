@@ -207,6 +207,12 @@ bool Expression::isOperator(char inputCharacter) { //return true if any of the o
        inputCharacter == '^' ||
        inputCharacter == '$')
         return true;
+    if(inputCharacter == '!' || inputCharacter == '@' || inputCharacter == '&'|| inputCharacter == '$' ||
+       inputCharacter == '#' || inputCharacter == '%' || inputCharacter == '~' ||
+       inputCharacter == '_'|| inputCharacter == ';'|| inputCharacter == ':'|| inputCharacter == '?') {
+        cout <<"Illigal character used rewrite expression."<< endl;
+        exit(1);
+    }
     
     return false;
 }
@@ -272,6 +278,12 @@ bool Expression::isOperand(char input)
         return true;
     if(input >= 'A' && input <= 'Z')
         return true;
+    if(input == '!' || input == '@' || input == '&'|| input == '$' ||
+       input == '#' || input == '%' || input == '~' ||
+       input == '_'|| input == ';'|| input == ':'|| input == '?') {
+        cout <<"Illigal character used rewrite expression."<< endl;
+        exit(1);
+    }
     return false;
 }
 
